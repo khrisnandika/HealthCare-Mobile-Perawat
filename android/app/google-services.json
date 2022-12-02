@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "949515559092",
+    "project_id": "healthcare-mobile-37828",
+    "storage_bucket": "healthcare-mobile-37828.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:949515559092:android:c90b51efea54ed162cb7e1",
+        "android_client_info": {
+          "package_name": "com.example.healthcare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "949515559092-sjbchcv80et3jobvoasvrjh7qa120c2n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmMWt_SaUnmU-eXoeT57vVd32fYBiz8Zc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "949515559092-sjbchcv80et3jobvoasvrjh7qa120c2n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:949515559092:android:e860a043cea59c552cb7e1",
+        "android_client_info": {
+          "package_name": "com.example.healthcare_perawat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "949515559092-sjbchcv80et3jobvoasvrjh7qa120c2n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmMWt_SaUnmU-eXoeT57vVd32fYBiz8Zc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "949515559092-sjbchcv80et3jobvoasvrjh7qa120c2n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
