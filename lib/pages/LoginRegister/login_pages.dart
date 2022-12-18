@@ -2,13 +2,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:get/get.dart';
 import 'package:healthcare_perawat/core/const.dart';
 import 'package:healthcare_perawat/pages/Chat/home_page.dart';
+import 'package:healthcare_perawat/pages/LoginRegister/register_pages.dart';
 import 'package:healthcare_perawat/widgets/animation.dart';
+
 import '../../models/ChatModels/UIHelper.dart';
 import '../../models/ChatModels/UserModel.dart';
-import '../../models/login_register_password_controller.dart';
 
 void main() => runApp(MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -21,7 +21,10 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final passCtrl = Get.put(passwordController());
+  bool _obscureText = true;
+
+  final FocusNode _focusNode = FocusNode();
+  Color? color;
 
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
@@ -69,7 +72,8 @@ class _LoginPageState extends State<LoginPage> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) {
-          return HomePage(userModel: userModel, firebaseUser: credential!.user!);
+          return HomePage(
+              userModel: userModel, firebaseUser: credential!.user!);
         }),
       );
     }
@@ -77,6 +81,15 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    _focusNode.addListener(
+      () {
+        setState(
+          () {
+            color = _focusNode.hasFocus ? kHealthCareColor : Colors.black54;
+          },
+        );
+      },
+    );
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -169,27 +182,30 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                               Container(
                                 padding: EdgeInsets.all(8.0),
-                                child: Obx(
-                                  () => TextFormField(
-                                    controller: _passwordController,
-                                    obscureText: passCtrl.showPassword.value,
-                                    decoration: InputDecoration(
-                                      suffixIcon: GestureDetector(
-                                        onTap: () {
-                                          passCtrl.showPass();
-                                        },
-                                        child: Icon(
-                                          passCtrl.showPassword.value
-                                              ? Icons.visibility
-                                              : Icons.visibility_off,
-                                          color: kGreyColor.withOpacity(0.5),
-                                        ),
+                                child: TextFormField(
+                                  focusNode: _focusNode,
+                                  controller: _passwordController,
+                                  obscureText: _obscureText,
+                                  decoration: InputDecoration(
+                                    suffixIcon: GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          _obscureText = !_obscureText;
+                                        });
+                                      },
+                                      child: Icon(
+                                        _obscureText
+                                            ? Icons.visibility_off
+                                            : Icons.visibility,
+                                        color: _focusNode.hasFocus
+                                            ? kHealthCareColor
+                                            : Colors.black26,
                                       ),
-                                      border: InputBorder.none,
-                                      hintText: "Password",
-                                      hintStyle: TextStyle(
-                                        color: Colors.grey[400],
-                                      ),
+                                    ),
+                                    border: InputBorder.none,
+                                    hintText: "Password",
+                                    hintStyle: TextStyle(
+                                      color: Colors.grey[400],
                                     ),
                                   ),
                                 ),
@@ -227,6 +243,44 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     SizedBox(
                       height: 40,
+                    ),
+                    FadeAnimation(
+                      1.5,
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Container(
+                              child: Text(
+                                "Tidak Memiliki Akun?",
+                                style: TextStyle(
+                                  color: kGreyColor,
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => RegisterPage(),
+                                  ),
+                                );
+                              },
+                              child: Text(
+                                "Buat Akun",
+                                style: TextStyle(
+                                  color: kHealthCareColor,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                   ],
                 ),

@@ -17,11 +17,11 @@ class _EditAkunState extends State<EditAkun> {
 
   final TextEditingController _namaController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _alamatController = TextEditingController();
-  final TextEditingController _genderController = TextEditingController();
+  final TextEditingController _strController = TextEditingController();
+  final TextEditingController _profesiController = TextEditingController();
 
-  String alamat = '';
-  String gender = '';
+  String no_str= '';
+  String profesi = '';
   String fullname = '';
   String profilepic = '';
 
@@ -32,8 +32,8 @@ class _EditAkunState extends State<EditAkun> {
         .get();
     setState(() {
       fullname = result.docs[0]['fullname'];
-      alamat = result.docs[0]['address'];
-      gender = result.docs[0]['gender'];
+      no_str= result.docs[0]['no_str'];
+      profesi = result.docs[0]['profesi'];
       profilepic = result.docs[0]['profilepic'];
     });
   }
@@ -44,8 +44,8 @@ class _EditAkunState extends State<EditAkun> {
         .doc(_emailController.text)
         .update({
       "fullname": _namaController.text,
-      "address": _alamatController.text,
-      "gender": _genderController.text,
+      "no_str": _strController.text,
+      "profesi": _profesiController.text,
     });
   }
 
@@ -73,8 +73,8 @@ class _EditAkunState extends State<EditAkun> {
     setState(() {
       _namaController.text = user!.displayName!;
       _emailController.text = user!.email!;
-      _alamatController.text = alamat;
-      _genderController.text = gender;
+      _strController.text = no_str;
+      _profesiController.text = profesi;
     });
   }
 
@@ -203,7 +203,7 @@ class _EditAkunState extends State<EditAkun> {
                 vertical: 10,
               ),
               child: TextField(
-                controller: _alamatController..text = alamat,
+                controller: _strController..text = no_str,
                 decoration: InputDecoration(
                     filled: true,
                     enabled: false,
@@ -216,7 +216,7 @@ class _EditAkunState extends State<EditAkun> {
                         color: kHealthCareColor,
                       ),
                     ),
-                    labelText: 'Alamat',
+                    labelText: 'No STR',
                     labelStyle: GoogleFonts.montserrat(
                         color: kHealthCareColor, fontSize: 14),
                     hintStyle: GoogleFonts.montserrat(fontSize: 14)),
@@ -228,7 +228,7 @@ class _EditAkunState extends State<EditAkun> {
                 vertical: 10,
               ),
               child: TextField(
-                controller: _genderController..text = gender,
+                controller: _profesiController..text = profesi,
                 decoration: InputDecoration(
                     filled: true,
                     enabled: false,
@@ -241,7 +241,7 @@ class _EditAkunState extends State<EditAkun> {
                         color: kHealthCareColor,
                       ),
                     ),
-                    labelText: 'Jenis Kelamin',
+                    labelText: 'Profesi',
                     labelStyle: GoogleFonts.montserrat(
                         color: kHealthCareColor, fontSize: 14),
                     hintStyle: GoogleFonts.montserrat(fontSize: 14)),
