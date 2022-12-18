@@ -30,20 +30,6 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         backgroundColor: kHealthCareColor,
         elevation: 0,
-        // leading: IconButton(
-        //   onPressed: () {
-        //     Navigator.push(
-        //       context,
-        //       MaterialPageRoute(
-        //         builder: (context) => NavigasiBar(),
-        //       ),
-        //     );
-        //   },
-        //   icon: Icon(
-        //     FlutterIcons.left_open_1,
-        //     color: kBackgroundColor,
-        //   ),
-        // ),
         title: Text(
           "Pesan",
           style: TextStyle(

@@ -137,7 +137,7 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
                                     : MainAxisAlignment.start,
                                 children: [
                                   Container(
-                                    margin: EdgeInsets.symmetric(vertical: 20),
+                                    margin: EdgeInsets.symmetric(vertical: 5),
                                     padding: EdgeInsets.symmetric(
                                       vertical: 10,
                                       horizontal: 10,
@@ -167,7 +167,7 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
                           );
                         } else {
                           return Center(
-                            child: Text("Say hi to your new friend"),
+                            child: Text("Say hi to your new friend",),
                           );
                         }
                       } else {
@@ -179,6 +179,9 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
                   ),
                 ),
               ),
+              const SizedBox(
+                height: 15,
+              ),
               Container(
                 color: kBackgroundColor,
                 padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
@@ -186,6 +189,7 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
                   children: [
                     Flexible(
                       child: TextField(
+                        cursorColor: kHealthCareColor,
                         controller: messageController,
                         maxLines: null,
                         decoration: InputDecoration(
