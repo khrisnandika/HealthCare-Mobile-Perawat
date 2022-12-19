@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:healthcare_perawat/core/const.dart';
-import 'package:healthcare_perawat/core/flutter_icons.dart';
 import 'package:healthcare_perawat/models/ChatModels/UIHelper.dart';
 import 'package:healthcare_perawat/pages/LoginRegister/login_pages.dart';
 
@@ -16,10 +15,77 @@ class _hapusPasswordState extends State<hapusPassword> {
   TextEditingController passwordController = TextEditingController();
 
   bool _obscureText = true;
-  
+
   final FocusNode _focusNode = FocusNode();
   final FocusNode _focusNodes = FocusNode();
   Color? color;
+
+  void checkValues() {
+    String email = emailController.text.trim();
+    String password = passwordController.text.trim();
+
+    if (email == "" || password == "") {
+      UIHelper.showAlertDialog(
+          context, "Data tidak lengkap", "Harap lengkapi semua kolom");
+    } else if (password == "") {
+      UIHelper.showAlertDialog(context, "Kesalahan terjadi",
+          "Kata sandi yang anda masukkan tidak cocok!");
+    } else {
+      _alertDialog();
+    }
+  }
+
+  void _alertDialog() async {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text("Hapus akun"),
+          content: SizedBox(
+            height: 95,
+            child: Column(
+              children: [
+                const Text("Apakah anda benar ingin menghapus akun?"),
+                const Spacer(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    SizedBox(
+                      height: 38,
+                      width: 90,
+                      child: ElevatedButton(
+                        child: Text("Batal"),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: kHealthCareColor,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 38,
+                      width: 90,
+                      child: ElevatedButton(
+                        child: Text("Hapus"),
+                        onPressed: () {
+                          _deleteUser(
+                              emailController.text, passwordController.text);
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: kdeleteColor,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
 
   void _deleteUser(String email, String password) async {
     User user = await FirebaseAuth.instance.currentUser!;
@@ -179,10 +245,10 @@ class _hapusPasswordState extends State<hapusPassword> {
                 width: MediaQuery.of(context).size.width * 0.85,
                 child: ElevatedButton(
                   onPressed: () {
-                    _deleteUser(emailController.text, passwordController.text);
+                    checkValues();
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: kOrangeColor,
+                    backgroundColor: Color(0xffFA645D),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),

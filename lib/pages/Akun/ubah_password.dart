@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:healthcare_perawat/core/const.dart';
 import 'package:healthcare_perawat/core/flutter_icons.dart';
 import 'package:healthcare_perawat/models/ChatModels/UIHelper.dart';
-
+import 'package:healthcare_perawat/pages/Akun/akun_profile.dart';
 
 class ubahPassword extends StatefulWidget {
   @override
@@ -23,6 +23,70 @@ class _ubahPasswordState extends State<ubahPassword> {
   final FocusNode _focusNodes = FocusNode();
   Color? color;
 
+  void checkValues() {
+    String cPassword = currentPasswordController.text.trim();
+    String nPassword = newPasswordController.text.trim();
+
+    if (cPassword == "" || nPassword == "") {
+      UIHelper.showAlertDialog(
+          context, "Data tidak lengkap", "Harap lengkapi semua kolom");
+    } else {
+      _alertDialog();
+    }
+  }
+
+  void _alertDialog() async {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text("Ubah Password"),
+          content: SizedBox(
+            height: 95,
+            child: Column(
+              children: [
+                const Text("Apakah anda benar ingin mengubah password?"),
+                const Spacer(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    SizedBox(
+                      height: 38,
+                      width: 90,
+                      child: ElevatedButton(
+                        child: Text("Batal"),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: kHealthCareColor,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 38,
+                      width: 90,
+                      child: ElevatedButton(
+                        child: Text("Hapus"),
+                        onPressed: () {
+                          _changePassword(currentPasswordController.text,
+                              newPasswordController.text);
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: kdeleteColor,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   void _changePassword(String currentPassword, String newPassword) async {
     final user = await FirebaseAuth.instance.currentUser;
     final cred = EmailAuthProvider.credential(
@@ -30,8 +94,14 @@ class _ubahPasswordState extends State<ubahPassword> {
 
     user.reauthenticateWithCredential(cred).then((value) {
       user.updatePassword(newPassword).then((_) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => AkunProfile(),
+          ),
+        );
         UIHelper.showAlertDialog(
-            context, "Berhasil", "Kata Sandi anda berhasil diubah !");
+            context, "Berhasil", "Password anda berhasil diubah !");
       }).catchError(
         (error) {
           UIHelper.showAlertDialog(
@@ -182,8 +252,7 @@ class _ubahPasswordState extends State<ubahPassword> {
                 width: MediaQuery.of(context).size.width * 0.85,
                 child: ElevatedButton(
                   onPressed: () {
-                    _changePassword(currentPasswordController.text,
-                        newPasswordController.text);
+                    checkValues();
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: kHealthCareColor,

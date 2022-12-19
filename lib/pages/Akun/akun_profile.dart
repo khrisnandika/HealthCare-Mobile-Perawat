@@ -55,6 +55,57 @@ class _AkunProfileState extends State<AkunProfile> {
     getDocId();
   }
 
+  void _alertDialog() async {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text("Keluar"),
+          content: SizedBox(
+            height: 85,
+            child: Column(
+              children: [
+                const Text("Apakah anda benar ingin keluar?"),
+                const Spacer(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    SizedBox(
+                      height: 38,
+                      width: 90,
+                      child: ElevatedButton(
+                        child: Text("Batal"),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: kHealthCareColor,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 38,
+                      width: 90,
+                      child: ElevatedButton(
+                        child: Text("Keluar"),
+                        onPressed: () {
+                          logOut(context);
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: kdeleteColor,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -237,7 +288,7 @@ class _AkunProfileState extends State<AkunProfile> {
             ),
             child: TextButton(
               onPressed: () {
-                logOut(context);
+                _alertDialog();
               },
               style: TextButton.styleFrom(
                 backgroundColor: kGreyColor.withOpacity(0.1),
