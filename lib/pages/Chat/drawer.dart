@@ -33,6 +33,57 @@ class _DrawwerScreenState extends State<DrawerScreen> {
     super.initState();
     getDocId();
   }
+  
+  void _alertDialog() async {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text("Keluar"),
+          content: SizedBox(
+            height: 85,
+            child: Column(
+              children: [
+                const Text("Apakah anda benar ingin keluar?"),
+                const Spacer(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    SizedBox(
+                      height: 38,
+                      width: 90,
+                      child: ElevatedButton(
+                        child: Text("Batal"),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: kHealthCareColor,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 38,
+                      width: 90,
+                      child: ElevatedButton(
+                        child: Text("Keluar"),
+                        onPressed: () {
+                          logOut(context);
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: kdeleteColor,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,9 +115,9 @@ class _DrawwerScreenState extends State<DrawerScreen> {
         const Divider(thickness: 1),
         DrawerListTile(
           iconData: Icons.logout_outlined,
-          title: "Logout",
+          title: "Keluar",
           onTilePressed: () {
-            logOut(context);
+            _alertDialog();
           },
         ),
       ],

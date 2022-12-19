@@ -79,7 +79,7 @@ class _SearchPageState extends State<SearchPage> {
             Navigator.pop(context);
           },
           icon: Icon(
-            FlutterIcons.left_open_1,
+            Icons.arrow_back_ios_new,
             color: kBackgroundColor,
           ),
         ),
