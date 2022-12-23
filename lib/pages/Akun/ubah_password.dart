@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:healthcare_perawat/core/const.dart';
 import 'package:healthcare_perawat/core/flutter_icons.dart';
 import 'package:healthcare_perawat/models/ChatModels/UIHelper.dart';
+import 'package:healthcare_perawat/models/ChatModels/UIHelper2.dart';
 import 'package:healthcare_perawat/pages/Akun/akun_profile.dart';
 
 class ubahPassword extends StatefulWidget {
@@ -59,7 +60,7 @@ class _ubahPasswordState extends State<ubahPassword> {
                           Navigator.pop(context);
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: kHealthCareColor,
+                          backgroundColor: kdeleteColor,
                         ),
                       ),
                     ),
@@ -67,13 +68,13 @@ class _ubahPasswordState extends State<ubahPassword> {
                       height: 38,
                       width: 90,
                       child: ElevatedButton(
-                        child: Text("Hapus"),
+                        child: Text("Simpan"),
                         onPressed: () {
                           _changePassword(currentPasswordController.text,
                               newPasswordController.text);
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: kdeleteColor,
+                          backgroundColor: kHealthCareColor,
                         ),
                       ),
                     ),
@@ -94,13 +95,8 @@ class _ubahPasswordState extends State<ubahPassword> {
 
     user.reauthenticateWithCredential(cred).then((value) {
       user.updatePassword(newPassword).then((_) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => AkunProfile(),
-          ),
-        );
-        UIHelper.showAlertDialog(
+        Navigator.popUntil(context, (route) => route.isFirst);
+        HelperUi.showAlertDialog(
             context, "Berhasil", "Password anda berhasil diubah !");
       }).catchError(
         (error) {

@@ -5,6 +5,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:healthcare_perawat/core/const.dart';
 import 'package:healthcare_perawat/core/flutter_icons.dart';
 import 'package:healthcare_perawat/models/ChatModels/UIHelper.dart';
+import 'package:healthcare_perawat/models/ChatModels/UIHelper2.dart';
+import 'package:healthcare_perawat/pages/Chat/drawer.dart';
 
 class EditAkun extends StatefulWidget {
   @override
@@ -20,10 +22,61 @@ class _EditAkunState extends State<EditAkun> {
   final TextEditingController _strController = TextEditingController();
   final TextEditingController _profesiController = TextEditingController();
 
-  String no_str= '';
+  String no_str = '';
   String profesi = '';
   String fullname = '';
   String profilepic = '';
+
+  void _alertDialog() async {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text("Edit Akun"),
+          content: SizedBox(
+            height: 95,
+            child: Column(
+              children: [
+                const Text("Apakah anda benar ingin mengedit akun?"),
+                const Spacer(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    SizedBox(
+                      height: 38,
+                      width: 90,
+                      child: ElevatedButton(
+                        child: Text("Batal"),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: kdeleteColor,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 38,
+                      width: 90,
+                      child: ElevatedButton(
+                        child: Text("Simpan"),
+                        onPressed: () {
+                          editData();
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: kHealthCareColor,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
 
   Future getDocId() async {
     var result = await _firebaseFirestore
@@ -32,7 +85,7 @@ class _EditAkunState extends State<EditAkun> {
         .get();
     setState(() {
       fullname = result.docs[0]['fullname'];
-      no_str= result.docs[0]['no_str'];
+      no_str = result.docs[0]['no_str'];
       profesi = result.docs[0]['profesi'];
       profilepic = result.docs[0]['profilepic'];
     });
@@ -49,12 +102,14 @@ class _EditAkunState extends State<EditAkun> {
     });
   }
 
-  Future editData() async {
+  void editData() async {
     try {
       if (_namaController.text != '') {
-        user?.updateDisplayName(_namaController.text);
-        UIHelper.showAlertDialog(
-            context, "Berhasil", "Akun anda berhasil diubah !");
+        user?.updateDisplayName(_namaController.text).then((value) {
+          Navigator.popUntil(context, (route) => route.isFirst);
+          HelperUi.showAlertDialog(
+              context, "Berhasil", "Akun anda berhasil diubah !");
+        });
       }
     } catch (e) {
       UIHelper.showAlertDialog(context, "Kesalahan terjadi", e.toString());
@@ -254,7 +309,7 @@ class _EditAkunState extends State<EditAkun> {
               height: MediaQuery.of(context).size.height * 0.065,
               width: MediaQuery.of(context).size.width * 0.84,
               child: ElevatedButton(
-                onPressed: () async => editData(),
+                onPressed: () async => _alertDialog(),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: kHealthCareColor,
                   shape: RoundedRectangleBorder(
