@@ -4,7 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:healthcare_perawat/core/const.dart';
-import 'package:healthcare_perawat/core/flutter_icons.dart';
 
 import '../../main.dart';
 import '../../models/ChatModels/ChatRoomModel.dart';
@@ -96,14 +95,15 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
           decoration: BoxDecoration(
             color: Color(0xffEFE6DD).withOpacity(0.5),
             image: DecorationImage(
-              colorFilter: new ColorFilter.mode(
-                  Colors.black.withOpacity(0.1), BlendMode.dstATop),
-              image: AssetImage(
-                'assets/image/pattern.jpg',
-              ), fit: BoxFit.fill
-            ),
+                colorFilter: new ColorFilter.mode(
+                    Colors.black.withOpacity(0.1), BlendMode.dstATop),
+                image: AssetImage(
+                  'assets/image/pattern.jpg',
+                ),
+                fit: BoxFit.fill),
           ),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // This is where the chats will go
               Expanded(
@@ -167,7 +167,9 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
                           );
                         } else {
                           return Center(
-                            child: Text("Say hi to your new friend",),
+                            child: Text(
+                              "Say hi to your new friend",
+                            ),
                           );
                         }
                       } else {
@@ -179,35 +181,66 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 15,
-              ),
-              Container(
-                color: kBackgroundColor,
-                padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-                child: Row(
-                  children: [
-                    Flexible(
-                      child: TextField(
-                        cursorColor: kHealthCareColor,
-                        controller: messageController,
-                        maxLines: null,
-                        decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: "Tulis pesan.."),
-                      ),
+              Row(
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.85,
+                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+                    child: Row(
+                      children: [
+                        Flexible(
+                          child: TextField(
+                            cursorColor: kHealthCareColor,
+                            controller: messageController,
+                            maxLines: null,
+                            decoration: InputDecoration(
+                              contentPadding:
+                                  EdgeInsets.symmetric(horizontal: 12),
+                              filled: true,
+                              fillColor: kWhiteColor,
+                              
+                              // border: OutlineInputBorder(
+                              //   borderSide: BorderSide(),
+                              //   borderRadius: BorderRadius.circular(20),
+                              // ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: kWhiteColor),
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              focusedBorder: new OutlineInputBorder(
+                                borderRadius: new BorderRadius.circular(20),
+                                borderSide: BorderSide(
+                                  color: kWhiteColor,
+                                  
+                                ),
+                              ),
+                              hintText: "Tulis Pesan...",
+                              hintStyle: TextStyle(
+                                fontSize: 15,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                    IconButton(
-                      onPressed: () {
-                        sendMessage();
-                      },
-                      icon: Icon(
-                        Icons.send,
+                  ),
+                  GestureDetector(
+                    onTap: sendMessage,
+                    child: Container(
+                      width: MediaQuery.of(context).size.width *0.12,
+                      height: MediaQuery.of(context).size.height *0.1,
+                      decoration: BoxDecoration(
                         color: kHealthCareColor,
+                        shape: BoxShape.circle,
+                      ),
+                      child: Icon(
+                        Icons.send,
+                        color: kWhiteColor,
+                        size: 24,
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ],
           ),

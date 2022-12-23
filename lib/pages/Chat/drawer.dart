@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:healthcare_perawat/core/const.dart';
 import 'package:healthcare_perawat/core/methods_firebase.dart';
 import 'package:healthcare_perawat/pages/Akun/akun_profile.dart';
+import 'package:healthcare_perawat/pages/Akun/detail_setting.dart';
+import 'package:healthcare_perawat/pages/Akun/edit_akun.dart';
 
 class DrawerScreen extends StatefulWidget {
   @override
@@ -33,7 +35,7 @@ class _DrawwerScreenState extends State<DrawerScreen> {
     super.initState();
     getDocId();
   }
-  
+
   void _alertDialog() async {
     showDialog(
       context: context,
@@ -91,7 +93,7 @@ class _DrawwerScreenState extends State<DrawerScreen> {
         child: ListView(
       children: <Widget>[
         UserAccountsDrawerHeader(
-          accountName: Text(fullname),
+          accountName: Text(user!.displayName!),
           currentAccountPicture: CircleAvatar(
             backgroundImage: NetworkImage(profilepic),
           ),
@@ -107,7 +109,19 @@ class _DrawwerScreenState extends State<DrawerScreen> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => AkunProfile(),
+                builder: (context) => EditAkun(),
+              ),
+            );
+          },
+        ),
+        DrawerListTile(
+          iconData: Icons.settings,
+          title: "Pengaturan",
+          onTilePressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => DetailSetting(),
               ),
             );
           },
