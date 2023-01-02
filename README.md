@@ -18,7 +18,7 @@ a team of developers from group 1 with the name the caps who develop a mobile ap
 
 ## development team
 - [x] Indra Prasetyo Wijaya
-- [x] Krina Choiril Andika
+- [x] Krisna Choiril Andika
 - [x] Mochammad Iqbal Maulana
 - [x] Fara Derliana
 - [x] Elisa Febrian S
