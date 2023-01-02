@@ -1,16 +1,27 @@
-# healthcare_perawat
+# HealthCare-admin
+## Short Description
+This application was made to make it easier for admins to manage user data in health consultations, where several features are available that are needed by admins.
 
-A new Flutter project.
+- [x] dashboard
+- [x] form poli
+- [x] form tenaga Medis
+- [x] table poli
+- [x] table tenaga Medis
+- [x] form Pasien
+- [x] tabel pasien
+- [x] api get data
+- [x] get data by id
+- [x] api insert data
 
-## Getting Started
+## introduce
+a team of developers from group 1 with the name the caps who develop a mobile application and website {healthcare} to take care of your health by consulting with medical personnel who have several polys in it
 
-This project is a starting point for a Flutter application.
+## development team
+- [x] Indra Prasetyo Wijaya
+- [x] Krina Choiril Andika
+- [x] Mochammad Iqbal Maulana
+- [x] Fara Derliana
+- [x] Elisa Febrian S
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+This application will be used by nurses and midwives
+#  © 2023 HealthCare- Crafted with ❤️
