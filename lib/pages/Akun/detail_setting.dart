@@ -89,9 +89,7 @@ class _DetailSettingState extends State<DetailSetting> {
                           fontWeight: FontWeight.w400),
                     ),
                   ),
-                  SizedBox(
-                    width: 150,
-                  ),
+                  Spacer(),
                   Icon(
                     Icons.arrow_forward_ios,
                     color: kBackgroundColor,
@@ -142,9 +140,7 @@ class _DetailSettingState extends State<DetailSetting> {
                             fontWeight: FontWeight.w400),
                       ),
                     ),
-                    SizedBox(
-                      width: 150,
-                    ),
+                    Spacer(),
                     Icon(
                       Icons.arrow_forward_ios,
                       color: kBackgroundColor,

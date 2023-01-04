@@ -99,7 +99,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   _simpan() async {
     final response = await http.post(
-      Uri.parse("http://10.0.2.2/healthcare-admin/api/insertPerawat.php"),
+      Uri.parse("https://healthcare.wstif3b-bws.id/api/insertPerawat.php"),
       body: {
         "nama": namaController.text,
         "no_str": strController.text,
@@ -150,7 +150,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 child: Stack(
                   children: <Widget>[
                     Positioned(
-                      right: 50,
+                      right: 20,
                       top: 25,
                       width: 300,
                       height: 200,
